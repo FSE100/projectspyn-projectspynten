@@ -1,7 +1,7 @@
 
+
 done = false;
 
-while (done == false)
     
 %---------------------------------- color ---------------------------------    
     brick.SetColorMode(3, 2);
@@ -19,7 +19,7 @@ while (done == false)
             brick.beep();
     end
 %----------------------------------- movement------------------------------
-    distanceLeft = brick.UltrasonicDist(1);
+    distanceLeft = UltrasonicDist(brick, 1);
     display(distanceLeft);
     readingFrontTouch = brick.TouchPressed(2);
     readingRightTouch = brick.TouchPressed(4);
@@ -45,6 +45,6 @@ while (done == false)
     
     
     
-end
+
 
 
