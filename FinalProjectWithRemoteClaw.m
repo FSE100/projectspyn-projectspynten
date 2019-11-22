@@ -18,17 +18,20 @@ while 1
     brick.MoveMotor('BC', 50);
     pause(0.1);
     
-     %---------------------------------- Code for RED ----------------------------------
+     %---------------------------------- Code for RED ---------------------
    if color == 5
+   % if the color sensor senses red, then the car will stop for 3 seconds
        brick.beep();
        brick.StopMotor('BC');
        pause(3);
    end
    
-    %---------------------------------- Touch ----------------------------------
+    %---------------------------------- Touch -----------------------------
     
     %front touch
     if readingFrontTouch
+    % if the front touch sensor is pressed, the vehicle will backup
+    % and make a 90 degree turn right
         brick.beep();
         brick.StopMotor('BC');
         brick.MoveMotor('BC', -30);
@@ -42,6 +45,8 @@ while 1
     
     %right touch
     if readingRightTouch
+    % if the right touch sensor is pressed, the vehicle will adjust 
+    % off of the wall by backing up to the left and the straightening out
        brick.beep();
        brick.StopMotor('BC');
        brick.MoveMotor('B', -55);
@@ -50,10 +55,14 @@ while 1
        brick.StopMotor('BC');
     end  
     
-  %---------------------------------- Distance ----------------------------------  
+  %---------------------------------- Distance ---------------------------- 
   
   %turn into openings
   if leftDistance > 50
+  % if the distance from the ultrasonic sensor to the wall is greater than
+  % 50cm then the robot will move forward a little while to get into the
+  % center of the square, take a left turn, and then drive forward so it
+  % can clear the wall previous of it.
     brick.MoveMotor('BC', 50);
     pause(1.3);
     brick.StopMotor('BC');
@@ -67,6 +76,9 @@ while 1
   
   %too close to wall
   if leftDistance < 10
+  % if the distance from the ultasonic sensor is less than 10cm from the
+  % wall, the the robot will adjust from the wall by moving back-right and
+  % then straightening up after.
     brick.StopMotor('BC');
     pause(0.1);
     brick.MoveMotor('B', -50);
@@ -79,11 +91,14 @@ while 1
 
   end
   
- % ---------------------------------- Color ----------------------------------
+ % ---------------------------------- Color -------------------------------
  
    
    %Code for BLUE
    if color == 2 && person == false
+   % if the color is blue, then it will trigger the keyboard so we can pick
+   % up the passenger with our controller. Once this runs once, then it
+   % will make "person == true", so this if statement wont run twice.
        brick.StopMotor('BC');
        while 1
            pause(0.1);
@@ -132,6 +147,10 @@ while 1
    
       %Code for GREEN
    if color == 3 && person == true
+   % if the color sensor hits green before it hits blue, then this if
+   % statement will not run. If the color sensor hits blue first, then hits
+   % blue, this if statement will run. This will promt the user to use the
+   % controller to drop the passenger off safely
        brick.StopMotor('BC');
        while 1
            pause(0.1);
@@ -179,8 +198,9 @@ while 1
    end
    
    
- % ---------------------------------- Stop Program -----------------------
+ % ---------------------------------- Stop Program ------------------------
     if(key == 'g')
+    % if 'g' is pressed, stop the robot
         brick.StopMotor('BC')
         break;
     end
